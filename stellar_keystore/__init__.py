@@ -46,14 +46,14 @@ def create_keystore(keypair: Keypair, password: bytes) -> dict:
     if not encrypted_data.startswith(nonce):
         raise ValueError("Encryption failed, nonce mismatch.")
 
-    encrypted_data = encrypted_data[len(nonce):]
+    encrypted_data = encrypted_data[len(nonce) :]
     return {
         "version": VERSION,
         "address": keypair.public_key,
         "crypto": {
-            "ciphertext": base64.b64encode(encrypted_data),
-            "nonce": base64.b64encode(nonce),
-            "salt": base64.b64encode(salt),
+            "ciphertext": base64.b64encode(encrypted_data).decode("utf-8"),
+            "nonce": base64.b64encode(nonce).decode("utf-8"),
+            "salt": base64.b64encode(salt).decode("utf-8"),
             "scryptOptions": {
                 "N": SCRYPT_N,
                 "r": SCRYPT_R,

@@ -1,3 +1,4 @@
+import json
 import unittest
 
 from stellar_sdk import Keypair
@@ -35,3 +36,11 @@ class TestStellarKeystore(unittest.TestCase):
         keystore = create_keystore(kp0, pwd)
         kp1 = load_keystore(keystore, pwd)
         self.assertEqual(kp0, kp1)
+
+    def test_keystore_serializable(self):
+        pwd = b"pAsswOrd!!!"
+        kp0 = Keypair.random()
+        keystore = create_keystore(kp0, pwd)
+        keystore_str = json.dumps(keystore)
+        keystore_dict = json.loads(keystore_str)
+        self.assertEqual(keystore, keystore_dict)
