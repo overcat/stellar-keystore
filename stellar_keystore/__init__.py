@@ -42,7 +42,7 @@ def create_keystore(keypair: Keypair, password: bytes) -> dict:
     )
     secret_box = nacl.secret.SecretBox(key)
     # In my opinion, it may be better to use keypair.raw_secret_key() as data.
-    encrypted_data = secret_box.encrypt(keypair.secret.encode(), nonce=nonce)
+    encrypted_data = bytes(secret_box.encrypt(keypair.secret.encode(), nonce=nonce))
     if not encrypted_data.startswith(nonce):
         raise ValueError("Encryption failed, nonce mismatch.")
 
