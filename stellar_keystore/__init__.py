@@ -7,7 +7,7 @@ from stellar_sdk import Keypair
 
 __all__ = ["create_keystore", "load_keystore"]
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 
 VERSION = "stellarport-1-20-2018"
 NONCE_SIZE = nacl.secret.SecretBox.NONCE_SIZE
