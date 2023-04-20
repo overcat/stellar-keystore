@@ -46,7 +46,7 @@ def create_keystore(keypair: Keypair, password: bytes) -> dict:
     if not encrypted_data.startswith(nonce):
         raise ValueError("Encryption failed, nonce mismatch.")
 
-    encrypted_data = encrypted_data[len(nonce) :]
+    encrypted_data = encrypted_data[len(nonce):]
     return {
         "version": VERSION,
         "address": keypair.public_key,
@@ -97,4 +97,9 @@ def load_keystore(keystore: dict, password: bytes) -> Keypair:
     )
     secret_box = nacl.secret.SecretBox(key)
     decrypted_data = secret_box.decrypt(encrypted_data, nonce=nonce)
-    return Keypair.from_secret(decrypted_data.decode())
+    kp = Keypair.from_secret(decrypted_data.decode())
+
+    address = keystore.get("address")
+    if kp.public_key != address:
+        raise ValueError(f"Invalid address: {address}")
+    return kp
