@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "stellar-keystore"
-version = "0.1.0.dev1"
+version = "0.1.0.dev2"
 description = "Tools for handling the encrypted keystore format used to store Stellar keypairs."
 authors = ["overcat <4catcode@gmail.com>"]
 maintainers = ["overcat <4catcode@gmail.com>"]
